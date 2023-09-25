@@ -8,9 +8,11 @@ generatorOptions:
   disableNameSuffixHash: true
 resources:
 - ./namespace.yaml
+- ./cluster-issuer.yaml
 helmCharts:
 - name: cert-manager # chart name
   includeCRDs: True # turn on when first time installation, leverage the one on kubeflow's installation
+  ValuesFile: values.yaml
   namespace: cert-manager
   releaseName: jetstack-cert-manager
   version: v1.12.2

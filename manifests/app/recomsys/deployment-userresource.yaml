@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: recomsys-user-resource
-  namespace: recomsys
+  namespace: bench
   labels:
     app: userresource
 spec:

@@ -7,13 +7,13 @@ spec:
   gateways:
   - bench/bench-gateway
   hosts:
-  - host1.footprint-ai.com
+  - bench.dev01.footprint-ai.com
   http:
   - match:
     - uri:
         prefix: /
     route:
     - destination:
-        host: recomsys-inference-service
+        host: 
         port:
-          number: 80
+          number: 8080

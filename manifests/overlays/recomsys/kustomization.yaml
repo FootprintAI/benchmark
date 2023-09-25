@@ -64,4 +64,8 @@ resources:
 - ../../base/metalb/overlays/kubeadm
 - ../../app/recomsys
 patches:
+- path: patches/certificate.yaml
+- path: patches/gateway.yaml
 - path: patches/istio-ingressgateway.yaml
+- path: patches/virtual-service.yaml
+

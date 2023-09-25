@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: recomsys-userresource-service
-  namespace: recomsys
+  namespace: bench
   labels:
     app: userresource
     monitoring: enabled

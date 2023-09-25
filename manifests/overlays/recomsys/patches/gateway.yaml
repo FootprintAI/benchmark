@@ -9,13 +9,13 @@ spec:
     istio: ingressgateway
   servers:
   - hosts:
-    - host1.footprint-ai.com # This should match a DNS name in the Certificate
+    - bench.dev01.footprint-ai.com # This should match a DNS name in the Certificate
     port:
       name: http
       number: 80
       protocol: HTTP
   - hosts:
-    - host1.footprint-ai.com # This should match a DNS name in the Certificate
+    - bench.dev01.footprint-ai.com # This should match a DNS name in the Certificate
     port:
       number: 443
       name: https

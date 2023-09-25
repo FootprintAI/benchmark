@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: recomsys-inference
-  namespace: recomsys
+  namespace: bench
   labels:
     app: inference
 spec:
