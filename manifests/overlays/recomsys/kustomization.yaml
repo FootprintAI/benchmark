@@ -1,0 +1,67 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+labels:
+- pairs:
+    app.footprint-ai.com/mainapp: benchmark
+    app.footprint-ai.com/variant: test01
+    app.footprint-ai.com/version: dev
+  # disableNameSuffixHash is true disables the default behavior of adding a
+  # suffix to the names of generated resources that is a hash of
+  # the resource contents.
+generatorOptions:
+  disableNameSuffixHash: true
+#configMapGenerator:
+#- name: frontend-config
+#  namespace: tintin
+#  behavior: replace
+#  literals:
+#  - api_endpoint=https://tintin.dev01.footprint-ai.com/
+#  - web_host=https://tintin.dev01.footprint-ai.com
+#  - cookie_domain=tintin.dev01.footprint-ai.com
+#- name: restapi
+#  namespace: tintin
+#  behavior: replace
+#  files:
+#  - configuration.json=./configuration.json
+#- name: authorization
+#  namespace: tintin
+#  behavior: replace
+#  files:
+#  - configuration.json=./authorization-configuration.json
+##configMapGenerator:
+##- name: endpoint
+##  namespace: grandturks
+##  behavior: replace
+##  literals:
+##  - app-endpoint=dev01.footprint-ai.com
+##  - minio-endpoint=storage.dev01.footprint-ai.com
+##- name: endpoint
+##  namespace: auth
+##  behavior: replace
+##  literals:
+##  - app-endpoint=dev01.footprint-ai.com
+##  - minio-endpoint=storage.dev01.footprint-ai.com
+##- name: issuer
+##  namespace: auth
+##  behavior: replace
+##  literals:
+##  - auth-issuer-endpoint=dev01.footprint-ai.com
+##- name: oidc-authservice-parameters
+##  namespace: istio-system
+##  behavior: merge
+##  literals:
+##  - OIDC_PROVIDER=https://dev01.footprint-ai.com/dex
+#images:
+#- name: reg.footprint-ai.com/tintin/authorization
+#  newTag: dev
+#- name: reg.footprint-ai.com/tintin/restapi
+#  newTag: dev
+#- name: reg.footprint-ai.com/tintin/wmlk-frontend
+#  newTag: dev
+resources:
+- ../../base/istio
+- ../../base/recomsys
+- ../../base/cert-manager
+- ../../base/metalb/overlays/kubeadm
+patches:
+- path: patches/istio-ingressgateway.yaml
