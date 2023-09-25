@@ -30,7 +30,7 @@ class S(BaseHTTPRequestHandler):
         mu, sigma = 0, 0.1 # mean and standard deviation
         s = np.random.normal(mu, sigma, 1)
         delayInS = abs(s[0])
-        pathparam = parse_qs(self.path)
+        pathparam = parse_qs(self.path.partition('?')[-1])
         logging.info("userid:{}, delay:{}".format(pathparam['userid'], delayInS))
         time.sleep(delayInS) # to millisecond
         self._set_response()

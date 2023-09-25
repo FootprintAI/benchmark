@@ -5,5 +5,6 @@ RUN apt-get update
 COPY . .
 RUN pip install --no-cache-dir --upgrade pip
 RUN pip install --no-cache-dir -r modelinf/requirements.txt
+RUN pip install --no-cache-dir -r userresource/requirements.txt
 
 ENTRYPOINT ["python"]

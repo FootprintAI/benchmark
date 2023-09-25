@@ -11,6 +11,7 @@ from prometheus_client import start_http_server, Summary, Histogram
 from urllib.parse import parse_qs
 import json
 import logging
+import pickle
 import requests
 import time
 import urllib.parse
@@ -20,8 +21,13 @@ from scipy import sparse
 from scipy.sparse import csr_matrix
 from urllib.parse import parse_qs
 
-userprofile_url = "http://recomsys-userresource-service.recomsys.svc.cluster.local"
+userprofile_url = "http://recomsys-userresource-service.bench.svc.cluster.local"
 X = sparse.load_npz("rating-matrix.npz")
+
+with open("movie-mapper.pkl", "rb") as f:
+    movie = pickle.load(f)
+    movie_mapper = movie["movie_mapper"]
+    movie_inv_mapper = movie["movie_inv_mapper"]
 
 REQUEST_TIME = Summary('post_inference_request_processing_seconds', 'Time spent processing request')
 REQUEST_HIST = Histogram('post_inference_request_processing_seconds_hist', 'Description of histogram')
@@ -38,7 +44,6 @@ class S(BaseHTTPRequestHandler):
         start_time = time.time()
 
         pathparam = parse_qs(self.path.partition('?')[-1])
-        logging.info(pathparam)
         userid = pathparam['userid'][0] if 'userid' in pathparam else ""
         # fetch user profile
         path_params = {
@@ -49,7 +54,7 @@ class S(BaseHTTPRequestHandler):
         requests.get(prefetch_url)
 
         # prepare the payload for inference
-        found = find_similar_movies(3, self.X, k=10)
+        found = find_similar_movies(3, X, movie_mapper, movie_inv_mapper, k=10)
         logging.info("recomsys:{}".format(found))
 
         self._set_response()

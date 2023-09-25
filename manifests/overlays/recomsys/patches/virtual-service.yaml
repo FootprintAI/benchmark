@@ -14,6 +14,6 @@ spec:
         prefix: /
     route:
     - destination:
-        host: 
+        host: recomsys-inference-service
         port:
-          number: 8080
+          number: 80

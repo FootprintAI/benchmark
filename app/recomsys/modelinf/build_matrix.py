@@ -5,7 +5,6 @@ import pandas as pd
 import sklearn
 import matplotlib.pyplot as plt
 import seaborn as sns
-import pickle
   
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
@@ -49,11 +48,18 @@ movie_stats = ratings.groupby('movieId')[['rating']].agg(['count', 'mean'])
 movie_stats.columns = movie_stats.columns.droplevel()
   
 # Now, we create user-item matrix using scipy csr matrix
+import pickle
 from scipy import sparse
 from scipy.sparse import csr_matrix
   
 def create_matrix(df):
-      
+
+    #Number of ratings: 100836
+    #Number of unique movieId's: 9724
+    #Number of unique users: 610
+    #Average ratings per user: 165.3
+    #Average ratings per movie: 10.37
+
     N = len(df['userId'].unique())
     M = len(df['movieId'].unique())
       
@@ -74,3 +80,5 @@ def create_matrix(df):
   
 X, user_mapper, movie_mapper, user_inv_mapper, movie_inv_mapper = create_matrix(ratings)
 sparse.save_npz("rating-matrix.npz", X)
+with open("movie-mapper.pkl", "wb") as f:
+    pickle.dump({ "movie_mapper": movie_mapper, "movie_inv_mapper": movie_inv_mapper }, f)

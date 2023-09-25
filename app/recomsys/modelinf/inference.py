@@ -2,7 +2,7 @@ from sklearn.neighbors import NearestNeighbors
 """
 Find similar movies using KNN
 """
-def find_similar_movies(movie_id, X, k, metric='cosine', show_distance=False):
+def find_similar_movies(movie_id, X, movie_mapper, movie_inv_mapper, k, metric='cosine', show_distance=False):
       
     neighbour_ids = []
       

@@ -15,10 +15,9 @@ spec:
       labels:
         app: userresource
     spec:
-      serviceAccountName: default-editor
       containers:
       - name: main
-        image: footprintai/recomsys:latest
+        image: footprintai/benchmark-recomsys:latest
         imagePullPolicy: Always
         resources:
           limits:

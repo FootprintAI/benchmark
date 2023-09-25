@@ -15,10 +15,9 @@ spec:
       labels:
         app: inference
     spec:
-      serviceAccountName: default-editor
       containers:
       - name: main
-        image: footprintai/recomsys:latest
+        image: footprintai/benchmark-recomsys:latest
         imagePullPolicy: Always
         resources:
           limits:
@@ -33,5 +32,5 @@ spec:
         args:
           - -c
           - >-
-              python
-              modelinf/main.py
+              cd modelinf && 
+              python main.py
