@@ -1,0 +1,25 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: recomsys-gateway
+  namespace: recomsys
+spec:
+  selector:
+    app: istio-ingressgateway
+    istio: ingressgateway
+  servers:
+  - hosts:
+    - host1.footprint-ai.com # This should match a DNS name in the Certificate
+    port:
+      name: http
+      number: 80
+      protocol: HTTP
+  - hosts:
+    - host1.footprint-ai.com # This should match a DNS name in the Certificate
+    port:
+      number: 443
+      name: https
+      protocol: HTTPS
+    tls:
+      mode: SIMPLE
+      credentialName: recomsys-ingress-cert # This should match the Certificate secretName

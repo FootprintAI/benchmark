@@ -7,6 +7,7 @@ Usage::
     ./server.py [<port>]
 """
 from http.server import BaseHTTPRequestHandler, HTTPServer
+from prometheus_client import start_http_server, Summary, Histogram
 from urllib.parse import parse_qs
 import json
 import logging
@@ -19,8 +20,11 @@ from scipy import sparse
 from scipy.sparse import csr_matrix
 from urllib.parse import parse_qs
 
-userprofile_url = "http://userprofile.default.svc.cluster.local"
+userprofile_url = "http://recomsys-userresource-service.recomsys.svc.cluster.local"
 X = sparse.load_npz("rating-matrix.npz")
+
+REQUEST_TIME = Summary('post_inference_request_processing_seconds', 'Time spent processing request')
+REQUEST_HIST = Histogram('post_inference_request_processing_seconds_hist', 'Description of histogram')
 
 class S(BaseHTTPRequestHandler):
     def _set_response(self):
@@ -28,6 +32,8 @@ class S(BaseHTTPRequestHandler):
         self.send_header('Content-type', 'text/html')
         self.end_headers()
 
+    @REQUEST_TIME.time()
+    @REQUEST_HIST.time()
     def do_POST(self):
         start_time = time.time()
 
@@ -62,6 +68,8 @@ def run(server_class=HTTPServer, handler_class=S, port=8080):
     logging.info('Stopping httpd...\n')
 
 if __name__ == '__main__':
+    start_http_server(50999)
+
     from sys import argv
 
     if len(argv) == 2:

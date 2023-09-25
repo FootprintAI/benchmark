@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: vs
+  namespace: recomsys
+spec:
+  gateways:
+  - grandturks/recomsys-gateway
+  hosts:
+  - host1.footprint-ai.com
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        host: 
+        port:
+          number: 8080
