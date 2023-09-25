@@ -60,8 +60,8 @@ generatorOptions:
 #  newTag: dev
 resources:
 - ../../base/istio
-- ../../base/recomsys
 - ../../base/cert-manager
 - ../../base/metalb/overlays/kubeadm
+- ../../app/recomsys
 patches:
 - path: patches/istio-ingressgateway.yaml

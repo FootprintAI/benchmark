@@ -30,7 +30,7 @@ spec:
         ports:
         - containerPort: 8080
         command: ["/bin/sh"]
-        args: [""]
+        args:
           - -c
           - >-
               python
