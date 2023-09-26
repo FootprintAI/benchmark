@@ -9,3 +9,4 @@ resources:
 - virtualservice.yaml
 - namespace.yaml
 - certificate.yaml
+- service-monitor.yaml

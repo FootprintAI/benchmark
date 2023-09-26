@@ -894,14 +894,6 @@ grafana:
         datasource: prometheus
         # datasource is the datasource id, we here use prometheus
         token: ""
-      grandturks-dashboard:
-        url: https://raw.githubusercontent.com/FootprintAI/grandturks-client/main/grafana/dashboard/prometheus-grandturks.json
-        datasource: prometheus
-        token: ""
-      longhorn-dashboard:
-        url: https://raw.githubusercontent.com/FootprintAI/grandturks-client/main/grafana/dashboard/longhorn-example-v1-1-0_rev6.json
-        datasource: prometheus
-        token: ""
 
 ## Component scraping the kube api server
 ##
