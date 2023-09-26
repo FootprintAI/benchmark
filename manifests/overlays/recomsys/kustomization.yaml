@@ -5,16 +5,12 @@ labels:
     app.footprint-ai.com/mainapp: benchmark
     app.footprint-ai.com/variant: test01
     app.footprint-ai.com/version: dev
-  # disableNameSuffixHash is true disables the default behavior of adding a
-  # suffix to the names of generated resources that is a hash of
-  # the resource contents.
 generatorOptions:
   disableNameSuffixHash: true
 resources:
 - ../../base/istio
 - ../../base/cert-manager
 - ../../base/metalb/overlays/kubeadm
-#- ../../base/monitoring
 - ../../app/recomsys
 patches:
 - path: patches/certificate.yaml
