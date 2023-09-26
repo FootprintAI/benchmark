@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: recomsys-inference
+  namespace: bench
+  labels:
+    app: inference
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inference
+  template:
+    metadata:
+      labels:
+        app: inference
+    spec:
+      containers:
+      - name: main
+        image: footprintai/benchmark-recomsys:latest
+        imagePullPolicy: Always
+        resources:
+          limits:
+            cpu: 2
+            memory: 1Gi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+        ports:
+        - containerPort: 8080
+        command: ["/bin/sh"]
+        args:
+          - -c
+          - >-
+              cd modelinf && 
+              python main.py

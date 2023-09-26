@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: vs
+  namespace: bench
+spec:
+  gateways:
+  - bench/bench-gateway
+  hosts:
+  - host1.footprint-ai.com
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        host: recomsys-inference-service
+        port:
+          number: 80

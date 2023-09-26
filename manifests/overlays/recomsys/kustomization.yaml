@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+labels:
+- pairs:
+    app.footprint-ai.com/mainapp: benchmark
+    app.footprint-ai.com/variant: test01
+    app.footprint-ai.com/version: dev
+generatorOptions:
+  disableNameSuffixHash: true
+resources:
+- ../../base/istio
+- ../../base/cert-manager
+- ../../base/metalb/overlays/kubeadm
+- ../../app/recomsys
+patches:
+- path: patches/certificate.yaml
+- path: patches/gateway.yaml
+- path: patches/istio-ingressgateway.yaml
+- path: patches/virtual-service.yaml
+

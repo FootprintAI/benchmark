@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: monitoring
+resources:
+- namespace.yaml
+helmCharts:
+- name: kube-prometheus-stack
+  includeCRDs: True # turn on when first time installation
+  ValuesFile: kube-prometheus-stack-values.yaml
+  # definition: https://github.com/kubernetes-sigs/kustomize/blob/672c751715be7dd0b43b4a2fce956c84452e0db9/api/types/helmchartargs.go#L61
+  releaseName: kube-prometheus-stack
+  version: 39.5.0
+  repo: https://prometheus-community.github.io/helm-charts
