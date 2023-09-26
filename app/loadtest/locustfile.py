@@ -1,7 +1,7 @@
 import random
 import uuid
 
-from locust import HttpLocust, TaskSet, task
+from locust import HttpUser, TaskSet, task
 
 class Visitor():
     def __init__(self, num_visitors: int):
@@ -13,23 +13,9 @@ class Visitor():
         index = random.randint(0, self.num_visitors)
         return self.visitor_id_slices[index]
 
-class WebsiteTasks(TaskSet):
-    visitor = Visitor(100)
-
-    def on_start(self):
-        """ on_start is called when a Locust start before any task is scheduled """
-        pass
-
-    def on_stop(self):
-        """ on_stop is called when the TaskSet is stopping """
-        pass
-
+visitor = Visitor(100000)
+class WebsiteUser(HttpUser):
     @task(1)
     def quote(self):
         userid = visitor.get_any_userid()
         self.client.post("/", {"userid": userid})
-
-class WebsiteUser(HttpLocust):
-    task_set = WebsiteTasks
-    min_wait = 2
-    max_wait = 5

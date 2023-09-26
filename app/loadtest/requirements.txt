@@ -1,2 +1,2 @@
-locustio
+locust
 uuid==1.30
