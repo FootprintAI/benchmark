@@ -1,11 +1,4 @@
 #!/usr/bin/env python3
-"""
-License: MIT License
-Copyright (c) 2023 Miel Donkers
-Very simple HTTP server in python for logging requests
-Usage::
-    ./server.py [<port>]
-"""
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from prometheus_client import start_http_server, Summary, Histogram
 from urllib.parse import parse_qs

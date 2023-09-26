@@ -1,17 +1,13 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-# NOTE(hsiny): namespace here is going to overwirte all resources' namespace below
 generatorOptions:
-  # disableNameSuffixHash is true disables the default behavior of adding a
-  # suffix to the names of generated resources that is a hash of
-  # the resource contents.
   disableNameSuffixHash: true
 resources:
 - ./namespace.yaml
 - ./cluster-issuer.yaml
 helmCharts:
 - name: cert-manager # chart name
-  includeCRDs: True # turn on when first time installation, leverage the one on kubeflow's installation
+  includeCRDs: True
   ValuesFile: values.yaml
   namespace: cert-manager
   releaseName: jetstack-cert-manager

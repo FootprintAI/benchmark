@@ -3,7 +3,4 @@ kind: Namespace
 metadata:
    name: monitoring
    labels:
-#     istio-injection: enabled
-#     pipelines.kubeflow.org/enabled: enabled
-#     serving.kubeflow.org/inferenceservice: enabled
      kubernetes.io/metadata.name: monitoring
