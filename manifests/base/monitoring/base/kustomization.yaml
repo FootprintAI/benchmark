@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: monitoring
 resources:
 - namespace.yaml
+- https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.6.4/components.yaml
 helmCharts:
 - name: kube-prometheus-stack
   includeCRDs: True # turn on when first time installation
