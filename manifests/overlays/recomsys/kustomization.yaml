@@ -4,9 +4,12 @@ labels:
 - pairs:
     app.footprint-ai.com/mainapp: benchmark
     app.footprint-ai.com/variant: test01
-    app.footprint-ai.com/version: dev
+    app.footprint-ai.com/version: v0.0.1
 generatorOptions:
   disableNameSuffixHash: true
+images:
+- name: footprintai/benchmark-recomsys
+  newTag: v0.0.1
 resources:
 - ../../base/istio
 - ../../base/cert-manager
