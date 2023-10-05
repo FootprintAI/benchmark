@@ -11,7 +11,9 @@ spec:
   http:
   - match:
     - uri:
-        prefix: /
+        prefix: /recomsysv1/
+    rewrite:
+      uri: /
     route:
     - destination:
         host: recomsys-inference-service

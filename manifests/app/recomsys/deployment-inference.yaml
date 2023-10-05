@@ -19,13 +19,16 @@ spec:
       - name: main
         image: footprintai/benchmark-recomsys:latest
         imagePullPolicy: Always
+        env:
+        - name: HTTP_THREAD_POOL_SIZE
+          value: "3"
         resources:
           limits:
-            cpu: 2
+            cpu: 200m
             memory: 1Gi
           requests:
-            cpu: 100m
-            memory: 128Mi
+            cpu: 200m
+            memory: 1Gi
         ports:
         - containerPort: 8080
         command: ["/bin/sh"]
